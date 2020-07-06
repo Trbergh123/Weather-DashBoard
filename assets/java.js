@@ -50,19 +50,19 @@ $(document).ready(function () {
             var wind = $("<p>").addClass("card-text").text("Wind Speed: " + data.wind.speed + " MPH");
             var humid = $("<p>").addClass("card-text").text("Humidity: " + data.main.humidity + "%");
             var temp = $("<p>").addClass("card-text").text("Temperature: " + data.main.temp + " °F");
+            var feels = $("<p>").addClass("card-text").text("Feels Like: " + data.main.feels_like + " °F");
 
             var lon = data.coord.lon;
             var lat = data.coord.lat;
 
             $.ajax({
                 type: "GET",
-                url: "https://api.openweathermap.org/data/2.5/uvi?appid=74be9cd9c32bfd399b3705045cdd3b26=" + lat + "&lon=" + lon,
-
+                url: "https://api.openweathermap.org/data/2.5/uvi?appid=74be9cd9c32bfd399b3705045cdd3b26" + "&lat=" + lat + "&lon=" + lon,
+               
 
             }).then(function (response) {
                 console.log(response);
 
-                var uvColor;
                 var localresponse = response.value;
                 var uvIndex = $("<p>").addClass("card-text").text("UV Index: ");
                 var btn = $("<span>").addClass("btn btn-sm").text(localresponse);
@@ -83,7 +83,7 @@ $(document).ready(function () {
 
 
             title.append(img);
-            cardBody.append(title, temp, humid, wind);
+            cardBody.append(title, temp, humid, wind,feels );
             card.append(cardBody);
             $("#today").append(card);
             console.log(data);
